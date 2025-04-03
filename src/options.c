@@ -583,24 +583,12 @@ void saveMemory(void)
 	inputLoop("Enter file to save:", &saveMemoryFunc);
 }
 
-static int changePixelSizeFunc(void)
-{
-	setPixelSize(choice);
-	printf("stdout: pixelSize=%d\n", getPixelSize());
-
-	if (choice == 1)
-		setScanlines(0);
-
-	SDL_SetVideoMode(280 * getPixelSize(), 192 * getPixelSize(), 8, SDL_HWSURFACE | (getFullscreen() ? SDL_FULLSCREEN : 0));
-
-	return 0;
-}
-
 void changePixelSize(void)
 {
 	type = TYPE_CHOICE;
-
-	inputLoop("Choose pixel size:\nPress 1 for 1x or 2 for 2x", &changePixelSizeFunc);
+	pixelSize = 3 - pixelSize
+	SDL_SetVideoMode(280 * pixelSize, 192 * pixelSize, 8, SDL_HWSURFACE | (getFullscreen() ? SDL_FULLSCREEN : 0));
+	return 0;
 }
 
 static int changeTerminalSpeedFunc(void)
