@@ -586,7 +586,7 @@ void saveMemory(void)
 void changePixelSize(void)
 {
 	type = TYPE_CHOICE;
-	pixelSize = 3 - pixelSize
+	pixelSize = 3 - pixelSize;
 	SDL_SetVideoMode(280 * pixelSize, 192 * pixelSize, 8, SDL_HWSURFACE | (getFullscreen() ? SDL_FULLSCREEN : 0));
 }
 
