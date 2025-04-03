@@ -21,7 +21,7 @@
 #include "pia6820.h"
 
 static unsigned char charac[1024], screenTbl[960];
-static int indexX, indexY, pixelSize = 2, _scanlines = 0, terminalSpeed = 60;
+static int indexX, indexY, pixelSize = 2, _scanlines = 0, terminalSpeed = 120;
 static long lastTime;
 static int _fullscreen = 0;
 static int _blinkCursor = 1, _blockCursor = 0;
@@ -44,11 +44,10 @@ int loadCharMap(void)
 	{
 		fread(charac, 1, 1024, fp);
 		fclose(fp);
+		return 1;
 	}
 	else
 		return 0;
-
-	return 1;
 }
 
 void setPixelSize(int ps)
@@ -137,23 +136,22 @@ static void outputDsp(unsigned char dsp)
 	writeDsp(dsp);
 }
 
-static void drawCharac(int xPosition, int yPosition, unsigned char r, unsigned char g, unsigned char b, unsigned char characNumber)
+static void drawCharac(int xPosition, int yPosition, unsigned char characNumber)
 {
 	SDL_Rect rect;
 	int k, l;
-
-	for (k = 0; k < 8; k++)
+	rect.w = pixelSize;
+	for (k = 0; k < 7; k++)
 	{
-		for (l = 1; l < 8; l++)
+		rect.y = yPosition + pixelSize * (k + 1);
+		for (l = 1; l < 6; l++)
 		{
 			if (charac[characNumber * 8 + k] & (0x01 << l))
 			{
-				rect.x = xPosition + pixelSize * (l - 1);
-				rect.y = yPosition + pixelSize * k;
-				rect.w = pixelSize;
+				rect.x = xPosition + pixelSize * l;
 				rect.h = pixelSize - (_scanlines ? 1 : 0);
 
-				SDL_FillRect(screen, &rect, SDL_MapRGB(screen->format, r, g, b));
+				SDL_FillRect(screen, &rect, 0xFFFFFF);
 			}
 		}
 	}
@@ -208,7 +206,7 @@ static void drawBlinkingCursor(void)
 		if (clearCursor)
 			SDL_FillRect(screen, &rect, 0);
 		else
-			drawCharac(rect.x, rect.y, 0, 255, 0, (unsigned char)(_blockCursor ? 0x01 : 0x40));
+			drawCharac(rect.x, rect.y, (unsigned char)(_blockCursor ? 0x01 : 0x40));
 
 		SDL_UpdateRect(screen, rect.x, rect.y, rect.w, rect.h);
 			
@@ -230,12 +228,12 @@ void redrawScreen(void)
 			xPosition = i * pixelSize * 7;
 			yPosition = j * pixelSize * 8;
 				
-			drawCharac(xPosition, yPosition, 0, 255, 0, screenTbl[j * 40 + i]);
+			drawCharac(xPosition, yPosition, screenTbl[j * 40 + i]);
 		}
 	}
 
 	if (!_blinkCursor)
-		drawCharac(indexX * pixelSize * 7, indexY * pixelSize * 8, 0, 255, 0, (unsigned char)(_blockCursor ? 0x01 : 0x40));
+		drawCharac(indexX * pixelSize * 7, indexY * pixelSize * 8, (unsigned char)(_blockCursor ? 0x01 : 0x40));
 
 	SDL_UpdateRect(screen, 0, 0, 0, 0);
 }
@@ -265,16 +263,16 @@ void updateScreen(void)
 		drawBlinkingCursor();
 }
 
-void drawCharacter(int xPosition, int yPosition, unsigned char r, unsigned char g, unsigned char b, unsigned char characNumber)
+void drawCharacter(int xPosition, int yPosition, unsigned char characNumber)
 {
 	if (_scanlines)
 	{
 		_scanlines = 0;
-		drawCharac(xPosition, yPosition, 0, 0, 0, characNumber);
+		drawCharac(xPosition, yPosition, characNumber);
 		_scanlines = 1;
 	}
 	else
-		drawCharac(xPosition, yPosition, 0, 0, 0, characNumber);
+		drawCharac(xPosition, yPosition, characNumber);
 }
 
 void initScreen(void)

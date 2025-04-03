@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
 
 	resetScreen();
 	resetMemory();
-	setSpeed(1000, 50);
+	setSpeed(960, 50);
 	resetM6502();
 	startM6502();
 

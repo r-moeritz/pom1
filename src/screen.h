@@ -29,7 +29,7 @@ void setTerminalSpeed(int ts);
 int getTerminalSpeed(void);
 void redrawScreen(void);
 void updateScreen(void);
-void drawCharacter(int xPosition, int yPosition, unsigned char r, unsigned char g, unsigned char b, unsigned char characNumber);
+void drawCharacter(int xPosition, int yPosition, unsigned char characNumber);
 void setFullscreen(int fullscreen);
 int getFullscreen(void);
 void drawCursor(void);

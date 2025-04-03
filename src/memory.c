@@ -69,11 +69,10 @@ static int loadBasic(void)
 	{
 		fread(&mem[0xE000], 1, 0x1000, fp);
 		fclose(fp);
+		return 1;
 	}
 	else
 		return 0;
-
-	return 1;
 }
 
 static int loadKrusader() {
