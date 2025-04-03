@@ -16,15 +16,10 @@ command line parameters.
 | Reset               | R      |                    | Soft reset the emulator.                       |
 | Hard Reset          | H      |                    | Hard reset the emulator.                       |
 | Pixel Size          | P      | -pixelsize <n>     | Set the pixel size (1 or 2).                   |
-| Scanlines           | N      | -scanlines         | Turn scanlines on or off (pixel size 2 only).  |
-| Terminal Speed      | T      | -terminalspeed <n> | Set the terminal speed (Range: 1 - 120).       |
 | RAM 8K              | E      | -ram8k             | Use only 8KB of RAM or entire 64KB of RAM.     |
 | Write In ROM        | W      | -writeinrom        | Allow writing data in ROM or not.              |
 | IRQ/BRK Vector      | V      |                    | Set address of interrupt vector.               |
 | Fullscreen          | F      | -fullscreen        | Switch to fullscreen or window.                |
-| Blink Cursor        | B      | -blinkcursor       | Set the cursor to blink or not.                |
-| Cursor Block        | C      | -blockcursor       | Set the cursor to block or @.                  |
-| Show About          | A      |                    | Show version and copyright information.        |
 | Toggle Krusader ROM | K      | -krusaderRom       | Toggle between Krusader and BASIC/Monitor ROMs |
 
 Before exiting, Pom1 writes its configuration options to
@@ -46,8 +41,3 @@ After that's it's just the usual:
 	$ ./configure
 	$ make
 	$ make install
-
-Other information
-===
-
-You can find more information about the project at the Pom1 website: http://pom1.sourceforge.net/
