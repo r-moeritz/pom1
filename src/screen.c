@@ -150,7 +150,6 @@ static void drawCharac(int xPosition, int yPosition, unsigned char characNumber)
 			if (charac[characNumber * 8 + k] & (0x01 << l))
 			{
 				rect.x = xPosition + pixelSize * l;
-				//rect.h = pixelSize - (_scanlines ? 1 : 0);
 				SDL_FillRect(screen, &rect, 0xFFFFFF);
 			}
 		}
