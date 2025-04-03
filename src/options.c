@@ -29,7 +29,7 @@
 
 #define isHexDigit(c) ((c >= '0' && c <= '9') || ((c & 0x5F) >= 'A' && (c & 0x5F) <= 'F'))
 
-static int step, type, max, choice;
+static int step, type, max, choice,pixelSize ;
 static unsigned int start;
 static char filename[1024], buffer[1024];
 static FILE *fp;
