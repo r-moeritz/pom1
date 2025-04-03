@@ -141,6 +141,7 @@ static void drawCharac(int xPosition, int yPosition, unsigned char characNumber)
 	SDL_Rect rect;
 	int k, l;
 	rect.w = pixelSize;
+	rect.h = pixelSize;
 	for (k = 0; k < 7; k++)
 	{
 		rect.y = yPosition + pixelSize * (k + 1);
@@ -149,8 +150,7 @@ static void drawCharac(int xPosition, int yPosition, unsigned char characNumber)
 			if (charac[characNumber * 8 + k] & (0x01 << l))
 			{
 				rect.x = xPosition + pixelSize * l;
-				rect.h = pixelSize - (_scanlines ? 1 : 0);
-
+				//rect.h = pixelSize - (_scanlines ? 1 : 0);
 				SDL_FillRect(screen, &rect, 0xFFFFFF);
 			}
 		}
@@ -206,7 +206,7 @@ static void drawBlinkingCursor(void)
 		if (clearCursor)
 			SDL_FillRect(screen, &rect, 0);
 		else
-			drawCharac(rect.x, rect.y, (unsigned char)(_blockCursor ? 0x01 : 0x40));
+			drawCharac(rect.x, rect.y, 0x40);
 
 		SDL_UpdateRect(screen, rect.x, rect.y, rect.w, rect.h);
 			
@@ -233,7 +233,7 @@ void redrawScreen(void)
 	}
 
 	if (!_blinkCursor)
-		drawCharac(indexX * pixelSize * 7, indexY * pixelSize * 8, (unsigned char)(_blockCursor ? 0x01 : 0x40));
+		drawCharac(indexX * pixelSize * 7, indexY * pixelSize * 8, 0x40);
 
 	SDL_UpdateRect(screen, 0, 0, 0, 0);
 }
@@ -265,14 +265,7 @@ void updateScreen(void)
 
 void drawCharacter(int xPosition, int yPosition, unsigned char characNumber)
 {
-	if (_scanlines)
-	{
-		_scanlines = 0;
-		drawCharac(xPosition, yPosition, characNumber);
-		_scanlines = 1;
-	}
-	else
-		drawCharac(xPosition, yPosition, characNumber);
+	drawCharac(xPosition, yPosition, characNumber);
 }
 
 void initScreen(void)
