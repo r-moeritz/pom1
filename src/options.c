@@ -50,7 +50,7 @@ static void drawString(const char *str, int x, int y)
 		}
 		else
 		{
-			drawCharacter(X, y, 0, 0, 0, c);
+			drawCharacter(X, y, c);
 			X += characterWidth;
 		}
 	}
@@ -77,7 +77,7 @@ static void inputLoop(const char *str, int (*func)(void))
 	drawString(str, 0, screenHeight - 16 * pixelSize);
 
 	if (type != TYPE_CHOICE)
-		drawCharacter(0, screenHeight - characterHeight, 0, 0, 0, 0x01);
+		drawCharacter(0, screenHeight - characterHeight, 0x01);
 
 	SDL_UpdateRect(screen, rect.x, rect.y, rect.w, rect.h);
 
@@ -115,7 +115,7 @@ static void inputLoop(const char *str, int (*func)(void))
 						
 						x += characterWidth;
 
-						drawCharacter(x, rect.y, 0, 0, 0, 0x01);
+						drawCharacter(x, rect.y, 0x01);
 
 						SDL_UpdateRect(screen, rect.x, rect.y, 2 * characterWidth, characterHeight);
 					}
@@ -137,7 +137,7 @@ static void inputLoop(const char *str, int (*func)(void))
 							if (buffer[(c - 39) + i] == ' ')
 								SDL_FillRect(screen, &rect, 255);
 							else
-								drawCharacter(rect.x, rect.y, 0, 0, 0, buffer[(c - 39) + i]);
+								drawCharacter(rect.x, rect.y, buffer[(c - 39) + i]);
 						}
 
 						SDL_UpdateRect(screen, 0, rect.y, screenWidth - characterWidth, characterHeight);
@@ -161,7 +161,7 @@ static void inputLoop(const char *str, int (*func)(void))
 						
 						SDL_FillRect(screen, &rect, 255);
 						
-						drawCharacter(x, rect.y, 0, 0, 0, 0x01);
+						drawCharacter(x, rect.y, 0x01);
 
 						SDL_UpdateRect(screen, rect.x, rect.y, rect.w, characterHeight);
 					}
@@ -183,7 +183,7 @@ static void inputLoop(const char *str, int (*func)(void))
 							if (buffer[(c - 39) + i] == ' ')
 								SDL_FillRect(screen, &rect, 255);
 							else
-								drawCharacter(rect.x, rect.y, 0, 0, 0, buffer[(c - 39) + i]);
+								drawCharacter(rect.x, rect.y, buffer[(c - 39) + i]);
 						}
 
 						SDL_UpdateRect(screen, 0, rect.y, screenWidth - characterWidth, characterHeight);
@@ -236,11 +236,11 @@ static void inputLoop(const char *str, int (*func)(void))
 						
 						SDL_FillRect(screen, &rect, 255);
 						
-						drawCharacter(x, rect.y, 0, 0, 0, tmp);
+						drawCharacter(x, rect.y, tmp);
 
 						x += characterWidth;
 
-						drawCharacter(x, rect.y, 0, 0, 0, 0x01);
+						drawCharacter(x, rect.y, 0x01);
 
 						SDL_UpdateRect(screen, rect.x, rect.y, 2 * characterWidth, characterHeight);
 					}
@@ -262,7 +262,7 @@ static void inputLoop(const char *str, int (*func)(void))
 							if (buffer[(c - 39) + i] == ' ')
 								SDL_FillRect(screen, &rect, 255);
 							else
-								drawCharacter(rect.x, rect.y, 0, 0, 0, buffer[(c - 39) + i]);
+								drawCharacter(rect.x, rect.y, buffer[(c - 39) + i]);
 						}
 
 						SDL_UpdateRect(screen, 0, rect.y, screenWidth - characterWidth, characterHeight);
