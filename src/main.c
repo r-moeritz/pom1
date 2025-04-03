@@ -57,14 +57,8 @@ int main(int argc, char *argv[])
 				if (temp == 1 || temp == 2)
 				{
 					if (temp == 1)
-						setScanlines(0);
-
 					setPixelSize(temp);
 				}
-			}
-			else if (!strcasecmp("-scanlines", argv[i])) {
-				if (getPixelSize() > 1)
-					setScanlines(1);
 			}
 			else if (!strcasecmp("-terminalspeed", argv[i]) && i + 1 < argc)
 			{
@@ -79,10 +73,6 @@ int main(int argc, char *argv[])
 				setWriteInRom(1);
 			else if (!strcasecmp("-fullscreen", argv[i]))
 				setFullscreen(1);
-			else if (!strcasecmp("-blinkcursor", argv[i]))
-				setBlinkCursor(1);
-			else if (!strcasecmp("-blockcursor", argv[i]))
-				setBlockCursor(1);
 			else if (!strcasecmp("-krusaderrom", argv[i]))
 			  setKrusaderRom(1);
 		}
@@ -120,7 +110,7 @@ int main(int argc, char *argv[])
 
 	resetScreen();
 	resetMemory();
-	setSpeed(960, 50);
+	setSpeed(1024, 50);
 	resetM6502();
 	startM6502();
 
